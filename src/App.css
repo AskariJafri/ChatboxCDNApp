@@ -1,0 +1,22 @@
+.App {
+  position: relative;
+}
+
+.fab {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #0078ff;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+}
