@@ -1,7 +1,14 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+// vite.config.js
+import { defineConfig } from 'vite';
+import path from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/main.jsx'), // Path to your entry file
+      name: 'Chatbox',
+      fileName: (format) => `chatbox.${format}.js`,
+      formats: ['umd'], // Specify UMD format
+    },
+  },
+});
