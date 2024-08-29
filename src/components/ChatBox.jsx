@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getChatMessages } from '../mockApi';
 import './ChatBox.css';
+import sendIcon from '../assets/send.svg';
 
 const ChatBox = ({ onClose }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -13,6 +15,14 @@ const ChatBox = ({ onClose }) => {
     };
     fetchMessages();
   }, []);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const handleInputChange = (e) => {
     setNewMessage(e.target.value);
@@ -29,16 +39,18 @@ const ChatBox = ({ onClose }) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       handleSendMessage();
-    }   
+    }
   };
 
   return (
     <div className="chat-box">
+      <button className="close-btn" onClick={onClose}>
+        ✖
+      </button>
       <div className="chat-header">
-        <h3>Chat</h3>
-        <button className="close-btn" onClick={onClose}>
-          ✖
-        </button>
+        <h2>Chat 👋 <br />
+          How can we help?</h2>
+        <h2></h2>
       </div>
       <div className="chat-messages">
         {messages.map((msg, index) => (
@@ -46,18 +58,21 @@ const ChatBox = ({ onClose }) => {
             <p>{msg.text}</p>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
       <div className="chat-input">
-        <textarea
-          value={newMessage}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          placeholder="Type a message..."
-          rows="3"
-        />
-        <button className="send-btn" onClick={handleSendMessage}>
-        ➤
-        </button>
+        <div className="textarea-container">
+          <textarea
+            value={newMessage}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            placeholder="Type your question..."
+            rows="3"
+          ></textarea>
+          <button className="send-btn" onClick={handleSendMessage}>
+            Send <img src={sendIcon} alt="Send" />
+          </button>
+        </div>
       </div>
     </div>
   );

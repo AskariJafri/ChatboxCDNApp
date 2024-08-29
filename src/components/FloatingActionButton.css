@@ -1,8 +1,8 @@
 .fab {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #0078ff;
+    width: 57px;
+    height: 57px;
+    border-radius: 16px !important;
+    background-color: #26A469 !important;
     color: white;
     font-size: 24px;
     display: flex;
@@ -15,4 +15,6 @@
     bottom: 24px;
     right: 34px;
     z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
   }
